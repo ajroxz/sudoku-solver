@@ -83,6 +83,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Center(
           child: Text(
@@ -98,13 +99,12 @@ class _HomeState extends State<Home> {
           SingleChildScrollView(
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[dir
-              
+              children: <Widget>[
                 Container(
                   //color: Colors.blue,
                   padding: EdgeInsets.all(10),
 
-                  height: 500,
+                  height: 400,
 
                   //width: double.infinity,
                   child: GridView.builder(
@@ -124,50 +124,52 @@ class _HomeState extends State<Home> {
                     itemCount: 81,
                   ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            margin: EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        RaisedButton.icon(
-                          color: Colors.white,
-                          onPressed: () {
-                            return solving();
-                          },
-                          icon: Icon(Icons.play_arrow),
-                          label: Text('Solve!'),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RaisedButton.icon(
-                          onPressed: reset,
-                          icon: Icon(Icons.restore_page),
-                          label: Text("Reset"),
-                        ),
-                      ],
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(70, 0, 3, 40),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          RaisedButton.icon(
+                            color: Colors.white,
+                            onPressed: () {
+                              return solving();
+                            },
+                            icon: Icon(Icons.play_arrow),
+                            label: Text('Solve!'),
+                          ),
+                        ],
+                      ),
+                      VerticalDivider(
+                        thickness: 20,
+                      ),
+                      Column(
+                        children: [
+                          RaisedButton.icon(
+                            onPressed: reset,
+                            icon: Icon(Icons.restore_page),
+                            label: Text("Reset"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    Text(message),
-                  ],
-                )
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(70, 0, 0, 40),
+                  child: Row(
+                    children: [
+                      Text(message),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.white24,
     );
   }
 }
