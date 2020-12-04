@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var controllers = <TextEditingController>[];
   var nums = [];
-  String message = "good to go!";
+  String message = "0 will be treated as null!";
   void set1(int ind, String val) {
     // controllers[ind].text = val;
     if (val == '') {
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
       nums[i] = 0;
     }
     setState(() {
-      message = '';
+      message = "0 will be treated as null!";
     });
   }
 
@@ -89,10 +89,10 @@ class _HomeState extends State<Home> {
           child: Text(
             'Sudoku Solver',
             style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
@@ -124,8 +124,21 @@ class _HomeState extends State<Home> {
                     itemCount: 81,
                   ),
                 ),
+                 Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Row(
+                    children: [
+                      Text(
+                        message,
+                        style: TextStyle(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(70, 0, 3, 40),
+                  padding: const EdgeInsets.fromLTRB(70, 10, 3, 0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -156,20 +169,13 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(70, 0, 0, 40),
-                  child: Row(
-                    children: [
-                      Text(message),
-                    ],
-                  ),
-                ),
+               
               ],
             ),
           ),
         ],
       ),
-      backgroundColor: Colors.white24,
+      backgroundColor: Colors.black,
     );
   }
 }
