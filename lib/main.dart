@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(),
     );
   }
@@ -96,6 +97,9 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
+          Divider(
+            thickness: 10,
+          ),
           SingleChildScrollView(
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,7 +128,7 @@ class _HomeState extends State<Home> {
                     itemCount: 81,
                   ),
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Row(
                     children: [
@@ -161,7 +165,7 @@ class _HomeState extends State<Home> {
                         children: [
                           RaisedButton.icon(
                             onPressed: reset,
-                            icon: Icon(Icons.restore_page),
+                            icon: Icon(Icons.restore),
                             label: Text("Reset"),
                           ),
                         ],
@@ -169,7 +173,6 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-               
               ],
             ),
           ),
