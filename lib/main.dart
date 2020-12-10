@@ -24,14 +24,23 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var controllers = <TextEditingController>[];
   var nums = [];
+  Color colr;
   String message = "0 will be treated as null!";
   void set1(int ind, String val) {
-    // controllers[ind].text = val;
     if (val == '') {
       nums[ind] = 0;
+    } else if (val == '.' || val == ',' || val == '-') {
+      setState(() {
+        message = "Wrong Input";
+      });
+      return;
     } else {
       nums[ind] = int.parse(val);
     }
+  }
+
+  void getcolor() {
+    colr = Colors.green;
   }
 
   void initState() {
@@ -42,16 +51,32 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  void solving() {
-    // for (int i = 0; i < 81; i++) {
-    //   // nums[i] = controllers[i].text;
-    //   // controllers[i].text = i.toString();
-    //   // nums[i] = i;
-    // }
+  bool check(List nums) {
+    for (int i = 0; i < 81; i++) {
+      if (nums[i] > 9) return true;
+    }
+    return false;
+  }
 
-    // print(nums);
+  bool check2(List nums) {
+    for (int i = 0; i < 81; i++) {
+      if (nums[i] != 0) return false;
+    }
+    return true;
+  }
+
+  void solving() {
     Solve sol = new Solve();
-    if (sol.func(nums)) {
+    if (check(nums)) {
+      setState(() {
+        message = "Wrong Input";
+      });
+    } else if (check2(nums) && sol.func(nums)) {
+      set2(nums);
+      setState(() {
+        message = "Default solution";
+      });
+    } else if (sol.func(nums)) {
       set2(nums);
       setState(() {
         message = sol.msg;
@@ -61,8 +86,6 @@ class _HomeState extends State<Home> {
         message = sol.msg;
       });
     }
-    // sol.func(nums);
-    // set2(nums);
   }
 
   void set2(List nums) {
@@ -102,27 +125,24 @@ class _HomeState extends State<Home> {
           ),
           SingleChildScrollView(
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  //color: Colors.blue,
                   padding: EdgeInsets.all(10),
-
                   height: 400,
-
-                  //width: double.infinity,
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 1 / 1, crossAxisCount: 9),
                     itemBuilder: (_, ind) => Card(
                       child: TextFormField(
-                        //focusNode: focusNode,
-                        //initialValue: controllers[ind].text,
+                        style: TextStyle(color: colr),
                         controller: controllers[ind],
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(focusColor: Colors.white),
-                        onChanged: (val) => set1(ind, val),
+                        decoration: InputDecoration(focusColor: Colors.black),
+                        onChanged: (val) {
+                          // getcolor();
+                          set1(ind, val);
+                        },
                       ),
                     ),
                     itemCount: 81,

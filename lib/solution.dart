@@ -27,8 +27,7 @@ class Solve {
     return true;
   }
 
-  bool solveSuduko(List<List<int>> board, int row, int col) 
-  {
+  bool solveSuduko(List<List<int>> board, int row, int col) {
     if (row == 8 && col == 9) return true;
 
     if (col == 9) {
@@ -50,19 +49,16 @@ class Solve {
     return false;
   }
 
-  bool submatrix(List<List<int>> board) 
-  {
+  bool submatrix(List<List<int>> board) {
     int n = 3, m = 3;
-    List<int> a=[];
+    List<int> a = [];
     int k = 0;
     int l = 0;
-    // unordered_map<int,int> a;
+
     while (m > 0) {
       while (n > 0) {
         for (int i = k; i < k + 3; i++) {
           for (int j = l; j < l + 3; j++) {
-            // cout<<grid[i][j];
-
             if (board[i][j] == 0) continue;
             if (a.contains(board[i][j])) {
               return false;
@@ -75,7 +71,6 @@ class Solve {
 
         k += 3;
         n = n - 1;
-        // cout<<endl;
       }
 
       l += 3;
@@ -88,11 +83,9 @@ class Solve {
     return true;
   }
 
-  bool check(List<List<int>> board) 
-  {
-    List<int> a=[];
+  bool check(List<List<int>> board) {
+    List<int> a = [];
 
-    //row
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
         if (board[i][j] == 0) {
@@ -106,8 +99,7 @@ class Solve {
 
       a.clear();
     }
-    // a.clear();
-    //col
+
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
         if (board[j][i] == 0) {
@@ -121,52 +113,33 @@ class Solve {
 
       a.clear();
     }
-    // a.clear();
-
-    //submatrix
 
     return submatrix(board);
   }
 
   int k = 0;
-  bool func(List nums) 
-  {
-    
-    
+  bool func(List nums) {
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
         board[i][j] = nums[k++];
       }
     }
 
-    // print("board");
-    // print(board);
+    if (check(board) && solveSuduko(board, 0, 0)) {
+      int c = 0;
 
-    if (check(board)&&solveSuduko(board, 0, 0) ) 
-      {
-        int c = 0;
-
-        for (int i = 0; i < 9; i++) {
-          for (int j = 0; j < 9; j++) {
-            nums[c++] = board[i][j];
-          }
+      for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+          nums[c++] = board[i][j];
         }
+      }
 
-        msg = "solved!";
+      msg = "solved!";
 
-        return true;
-      }  
-    else 
-    {
+      return true;
+    } else {
       msg = "Wrong Sudoku!";
       return false;
     }
-
-    // for (int i = 0; i < 9; i++) {
-    //   for (int j = 0; j < 9; j++) {
-    //     print(board[i][j]);
-    //   }
-    //   print('\n');
-    // }
   }
 }
