@@ -39,10 +39,6 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void getcolor() {
-    colr = Colors.green;
-  }
-
   void initState() {
     for (int i = 0; i < 81; i++) {
       controllers.add(TextEditingController(text: ''));
@@ -140,7 +136,6 @@ class _HomeState extends State<Home> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(focusColor: Colors.black),
                         onChanged: (val) {
-                          // getcolor();
                           set1(ind, val);
                         },
                       ),
